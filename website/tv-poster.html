@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poster creator</title>
+    <link rel="stylesheet" href="poster.css">
+
+</head>
+<body>
+<br><br>
+<h2 class="main_title"> Bienvenue sur la plateforme de création de posters de vos séries préférées !</h2>
+<br>
+<h3 class="explanation"> 1. Cliquez sur l'image pour la changer. <br> 2. Vous pouvez également changer le titre comme bon vous semble en cliquant sur le titre directement sur le poster <br> 3. Vous pouvez ensuite télécharger votre poster à l'apparition du bouton télécharger en bas a droite</h3>
+<br><br>
+<div style="display: flex">
+    <label style="color: slategray; font-weight: bold">Recherche une série :<br><br>
+        <input value="Stranger things" onblur="searchTitle(this)" style="width: 400px; height: 20px; padding: 10px; border: none; border-radius: 5px; background: floralwhite; color: black;">
+    </label>
+</div>
+<span style="font-size: 12px; cursor:pointer; "><a style="color: slategray;" href="movie-poster.html">Je veux chercher un film !</a></span><br><br><br>
+<div>
+    <button id="download" style="display: none; cursor: pointer; width: 100px; height: 40px; position: fixed; right: 20px; bottom:20px; border: none; border-radius: 5px; background: black; color: white;" onclick="htmltopngresult()"> Télécharger </button>
+</div>
+<div id="export" style="width: 30cm;">
+    <div id="poster">
+        <div class="palettes">
+            <div class="palette" id="palette0"></div>
+            <div class="palette" id="palette1"></div>
+            <div class="palette" id="palette2"></div>
+            <div class="palette" id="palette3"></div>
+            <div class="palette" id="palette4"></div>
+        </div>
+
+        <div id="date" class="date">18/12/1998</div>
+
+        <div class="container">
+            <div class="column">
+                <h1>Director</h1>
+                <p id="director0">...</p>
+            </div>
+            <div class="column">
+                <h1>Cast</h1>
+                <p id="actor0">...</p>
+                <p id="actor1">...</p>
+                <p id="actor2">...</p>
+            </div>
+            <div class="column">
+                <h1>Sound</h1>
+                <p id="music0">...</p>
+            </div>
+            <div class="column">
+                <h1>Writing</h1>
+                <p id="writing0">...</p>
+                <p id="writing1">...</p>
+            </div>
+        </div>
+
+        <div id="title" class="title">
+            <div id="movie_name" style="width: auto;" onblur="setBarWidth()" contenteditable="true">Stranger things</div>
+        </div>
+        <div id="bar"></div>
+
+        <div style="background: floralwhite">
+            <!--        <div class="poster_img filtered"></div>-->
+            <img id="imageid" class="poster_img" src="https://image.tmdb.org/t/p/original/2MaumbgBlW1NoPo3ZJO38A6v7OS.jpg" alt="image_poster">
+        </div>
+    </div>
+
+</div>
+
+<div id="result_poster" style="margin-top: 10px;">
+    <img id="imageresult" style="width: 500px; height: 700px; visibility: hidden;">
+</div>
+
+</body>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/dist/dom-to-image.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="hello-tv.js"></script>
+<script>
+    document.getElementById('movie_name').style.fontSize = '120px';
+
+    // document.getElementById('movie_name').addEventListener('overflow', function (){
+    //     console.log("ge")
+    // })
+
+    document.getElementById('movie_name').onkeyup = function(e){
+        if (this.clientWidth > 800){
+            this.style.fontSize = '100px';
+        }
+        else {
+            this.style.fontSize = '120px';
+        }
+    }
+
+    document.getElementById('export').style.transform = "scale(" + 0.50 + ")"
+    document.getElementById('export').style.transformOrigin = "top left"
+
+
+    // document.getElementById('movie_name').onkeyup = function(e){
+    //     var s = parseInt(this.style.fontSize.replace("px", ""))
+    //
+    //     if(e.key == 'Backspace' || e.key == 'Delete'){
+    //         this.style.fontSize = parseInt(this.style.fontSize.replace("px", "")) + 3 + "px";
+    //     }
+    //     else {
+    //         this.style.fontSize = parseInt(this.style.fontSize.replace("px", "")) - 3 + "px";
+    //     }
+
+
+        //document.getElementById('movie_name').style.fontSize = '8vw';
+    // }
+    // var min = 50;
+    // var max = 120;
+    // function changeFontSize(delta, el) {
+    //     if (el.style.fontSize){
+    //         var s = parseInt(el.style.fontSize.replace("px", ""));
+    //     }
+    //     // if (s !== max) {
+    //     //     s += delta;
+    //     // }
+    //     s += delta;
+    //     console.log(el.style.fontSize)
+    //     el.style.fontSize = s + "px"
+    // }
+    //
+    // document.getElementById('movie_name').style.fontSize = '120px';
+    // let countext = document.getElementById('movie_name').innerText.length;
+    // document.getElementById('movie_name').onkeyup = function(){
+    //     // console.log('start',  countext)
+    //     // if(this.innerText.length > countext){
+    //     //     this.style.fontSize = (parseInt(this.style.fontSize.split('em')[0]) - 0.3) + 'em'
+    //     //     countext += 1
+    //     //     console.log('if',  countext)
+    //     // }
+    //     // else {
+    //     //     this.style.fontSize = (parseInt(this.style.fontSize.split('em')[0]) + 0.3) + 'em'
+    //     //     countext -= 1
+    //     //     console.log('else',  countext)
+    //     // }
+    //
+    //     if(this.innerText.length > countext){
+    //         // this.style.fontSize = (this.style.fontSize.split('em')[0] - 0.25) + 'em'
+    //         changeFontSize(-10, this);
+    //         countext += 1
+    //     }
+    //     else {
+    //         changeFontSize(10, this);
+    //         countext -= 1
+    //         // this.style.fontSize = '8em'
+    //     }
+    // }
+</script>
+</html>

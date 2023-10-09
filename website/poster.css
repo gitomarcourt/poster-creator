@@ -1,0 +1,126 @@
+* {
+    background: #d9d9d9;
+    font-family: "system-ui";
+}
+
+.main_title{
+    width: 80%;
+    margin: 0 auto;
+    color: #465260;
+    font-size: 2vw;
+}
+
+.explanation{
+    width: 80%;
+    margin: 0 auto;
+    color: slategray;
+    font-size: 1em;
+}
+#poster {
+    width: 30cm;
+    height: 40cm;
+    background: floralwhite;
+}
+
+.palettes{
+    display: flex;
+    margin: 1cm 2cm 1cm 2cm;
+    position: absolute;
+    background: floralwhite;
+}
+
+.palette {
+    width: 0.8cm;
+    height: 0.8cm;
+    background: #000000;
+    margin: 0.1cm;
+}
+
+.date {
+    width: 200px;
+    font-size: 24px;
+    font-weight: 400;
+    background: floralwhite;
+    float: right;
+    margin: 1cm 2cm 1cm 2cm;
+}
+
+.container {
+    width: 26cm;
+    height: 4cm;
+    position: relative;
+    left: 2cm;
+    background: floralwhite;
+    display: flex;
+}
+.column {
+    width: 8cm;
+    height: 100%;
+    background: floralwhite;
+    text-align: center;
+}
+
+.column > h1 {
+    font-size: 24px;
+    font-weight: 600;
+    background: floralwhite;
+}
+
+.column > p {
+    font-size: 18px;
+    font-weight: 400;
+    background: floralwhite;
+    line-height: 8px;
+}
+
+.title {
+    width: 26cm;
+    height: 4cm;
+    left: 2cm;
+    position: relative;
+    background: floralwhite;
+}
+
+.title > div {
+    width: auto;
+    position: relative;
+    background: floralwhite;
+    margin : auto;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.poster_img {
+    width: 26cm;
+    height: 26cm;
+    position: relative;
+    left: 2cm;
+    object-fit: cover;
+    margin-top: 1cm;
+    filter: grayscale(40%);
+}
+
+#bar {
+    width: 13.5cm;
+    height: 10px;
+    margin-top: 10px;
+    margin-left: 2cm;
+    background: #000000;
+}
+
+/*.filtered {*/
+/*    background-image:*/
+/*            radial-gradient(ellipse, #0000, #0007),*/
+/*            linear-gradient(0deg, rgba(231, 213, 195, 0.33), rgba(213, 198, 150, 0.33)),*/
+/*            url(https://i.ibb.co/vJt5HSh/noisy-texture-300x300-o10-d10-c-a82851-t1.png),*/
+/*            url(https://image.tmdb.org/t/p/w600_and_h900_bestv2/aej3LRUga5rhgkmRP6XMFw3ejbl.jpg);*/
+/*    background-size: auto, auto, auto, cover;*/
+/*}*/
+
+
+
+
+
+
+
+
